@@ -8,10 +8,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.swapsell</groupId>
-	<artifactId>Authentication-Service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Authentication-Service</name>
 	<description>this microservice will have the functionality to authenticate user</description>
 	<properties>
 		<java.version>17</java.version>
