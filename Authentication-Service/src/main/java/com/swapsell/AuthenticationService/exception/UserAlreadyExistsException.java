@@ -1,4 +1,5 @@
 package com.swapsell.AuthenticationService.exception;
 
-public class UserAlreadyExistsException {
+public class UserAlreadyExistsException extends Exception {
+
 }
