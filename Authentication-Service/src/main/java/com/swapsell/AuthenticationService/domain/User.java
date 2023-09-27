@@ -6,13 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-@Getter
-@Setter
-@ToString
 @Entity
 public class User {
     @Id
@@ -22,4 +16,6 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+
 }
+
