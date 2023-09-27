@@ -7,6 +7,10 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class User {
     @Id
