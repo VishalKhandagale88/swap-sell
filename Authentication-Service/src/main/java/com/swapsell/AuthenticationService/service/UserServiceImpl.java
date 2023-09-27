@@ -12,9 +12,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+
 
     @Override
     public User saveUser(User user) throws UserAlreadyExistsException {
