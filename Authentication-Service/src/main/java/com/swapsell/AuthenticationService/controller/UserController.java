@@ -40,4 +40,9 @@ public class UserController {
 
     }
 
+    @GetMapping("/user/{email}")
+    public ResponseEntity<?> getUserByEmailId(@PathVariable("email") String emailId){
+        return null;
+    }
+
 }
