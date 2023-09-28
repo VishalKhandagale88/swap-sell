@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) throws UserAlreadyExistsException {
         Optional<User> userWithEmailId = userRepository.findByEmail(user.getEmail());
         if (userWithEmailId.isPresent()){
-            throw new UserAlreadyExistsException("This user is already present");
+            throw new UserAlreadyExistsException("This user is already taken try other");
         }
         return userRepository.save(user);
     }
@@ -28,12 +28,10 @@ public class UserServiceImpl implements UserService {
         User existingUer = null;
         if (userWithEmailId.isPresent()){
              existingUer = userWithEmailId.get();
-
         }
         if (existingUer==null){
             throw new UserDoesNotExistsException("User does not exists");
         }
       return existingUer;
-
     }
 }
