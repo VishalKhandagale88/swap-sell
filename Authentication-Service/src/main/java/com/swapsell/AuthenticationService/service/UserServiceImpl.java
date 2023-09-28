@@ -24,6 +24,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User UserLogIn(String email) throws UserDoesNotExistsException {
-        return null;
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()){
+            throw new UserDoesNotExistsException("User Does not exists");
+        }
+        return user.get();
     }
 }
