@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
         User existingUer = null;
         if (userWithEmailId.isPresent()){
              existingUer = userWithEmailId.get();
+            System.out.println(existingUer);
         }
         if (existingUer==null){
             throw new UserDoesNotExistsException("User does not exists");

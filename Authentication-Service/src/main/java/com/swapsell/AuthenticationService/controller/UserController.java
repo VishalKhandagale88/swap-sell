@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/logIn")
-    public ResponseEntity<?> userLogIn(@PathVariable User user){
+    public ResponseEntity<?> userLogIn(@RequestBody User user){
         try {
             User userToLogIn = userService.UserLogIn(user);
             return new ResponseEntity<>(user,HttpStatus.OK);
