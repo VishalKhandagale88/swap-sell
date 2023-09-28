@@ -2,6 +2,7 @@ package com.swapsell.AuthenticationService.controller;
 
 
 import com.swapsell.AuthenticationService.domain.User;
+import com.swapsell.AuthenticationService.domain.UserResponse;
 import com.swapsell.AuthenticationService.exception.UserAlreadyExistsException;
 import com.swapsell.AuthenticationService.exception.UserDoesNotExistsException;
 import com.swapsell.AuthenticationService.service.UserService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -42,7 +45,12 @@ public class UserController {
 
     @GetMapping("/user/{email}")
     public ResponseEntity<?> getUserByEmailId(@PathVariable("email") String emailId){
-        return null;
+        Optional<User> userFromDb = userService.userByEmailId(emailId);
+        if (userFromDb.isPresent()){
+            User existingUser = userFromDb.get();
+            UserResponse userResponse = new UserResponse(existingUser.getId(), existingUser.getFistName(), existingUser.getLastName(), existingUser.getEmail());
+            return new  ResponseEntity<>(userResponse,HttpStatus.OK);
+        }
     }
 
 }
