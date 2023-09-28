@@ -50,6 +50,8 @@ public class UserController {
             User existingUser = userFromDb.get();
             UserResponse userResponse = new UserResponse(existingUser.getId(), existingUser.getFistName(), existingUser.getLastName(), existingUser.getEmail());
             return new  ResponseEntity<>(userResponse,HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
         }
     }
 
