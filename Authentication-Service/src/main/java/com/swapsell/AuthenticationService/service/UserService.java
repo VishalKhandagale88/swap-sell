@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
     User saveUser(User user) throws UserAlreadyExistsException;
-    User UserLogIn(String email) throws UserDoesNotExistsException;
+    User UserLogIn(User user) throws UserDoesNotExistsException;
 }

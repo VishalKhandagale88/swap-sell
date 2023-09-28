@@ -28,10 +28,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/logIn")
-    public ResponseEntity<?> userLogIn(@PathVariable String email){
+    @GetMapping("/logIn/")
+    public ResponseEntity<?> userLogIn(@RequestBody User user){
         try {
-            User user = userService.UserLogIn(email);
+            User userToLogIn = userService.UserLogIn(user);
             return new ResponseEntity<>(user,HttpStatus.OK);
 
         } catch (UserDoesNotExistsException e) {
