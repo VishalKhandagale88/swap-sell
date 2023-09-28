@@ -35,8 +35,10 @@ public class UserController {
             return new ResponseEntity<>(user,HttpStatus.OK);
 
         } catch (UserDoesNotExistsException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
+
     }
 
 }
