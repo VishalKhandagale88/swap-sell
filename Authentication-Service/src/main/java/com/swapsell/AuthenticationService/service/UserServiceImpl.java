@@ -40,4 +40,14 @@ public class UserServiceImpl implements UserService {
         return  userRepository.findByEmail(emailId);
 
     }
+
+    @Override
+    public User findUserByEmailAndPassWord(String email, String password) throws UserDoesNotExistsException {
+        Optional<User> userWithEmailAndPassword = userRepository.findByEmailAndPassword(email, password);
+        if (userWithEmailAndPassword.isPresent()){
+         return userWithEmailAndPassword.get();
+        }else {
+            throw new UserDoesNotExistsException("email or password is wrong");
+        }
+    }
 }
