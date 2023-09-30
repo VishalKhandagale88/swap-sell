@@ -4,10 +4,11 @@ import com.swapsell.AuthenticationService.domain.UserLogIn;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 public class JWTSecurityTokenGeneratorImpl implements JWTSecurityTokenGenerator {
     @Override
     public Map<String, String> generateJWTToken(UserLogIn userLogIn) {
