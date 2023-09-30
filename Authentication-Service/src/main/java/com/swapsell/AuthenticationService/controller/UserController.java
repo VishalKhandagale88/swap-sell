@@ -61,7 +61,7 @@ public class UserController {
             UserResponse userResponse = new UserResponse(existingUser.getId(), existingUser.getFistName(), existingUser.getLastName(), existingUser.getEmail());
             return new  ResponseEntity<>(userResponse,HttpStatus.OK);
         }else {
-            return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("user with "+emailId+" email id not found",HttpStatus.NOT_FOUND);
         }
     }
 
