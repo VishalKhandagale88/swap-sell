@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,13 +35,12 @@ public class UserController {
 
     @GetMapping("/logIn")
     public ResponseEntity<?> userLogIn(@RequestBody User user){
-        try {
-            User userToLogIn = userService.UserLogIn(user);
-            return new ResponseEntity<>(user,HttpStatus.OK);
-
-        } catch (UserDoesNotExistsException e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+        Map<String,String> token = new HashMap<>();
+        if (userService.userByEmailId(user.getEmail()).isEmpty()){
+            token.put("message","No user found");
+            return new ResponseEntity<>(token,HttpStatus.OK);
         }
+        return null;
 
     }
 
