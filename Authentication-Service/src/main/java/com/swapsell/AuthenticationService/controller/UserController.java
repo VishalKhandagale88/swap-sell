@@ -5,6 +5,7 @@ import com.swapsell.AuthenticationService.domain.User;
 import com.swapsell.AuthenticationService.domain.UserResponse;
 import com.swapsell.AuthenticationService.exception.UserAlreadyExistsException;
 import com.swapsell.AuthenticationService.exception.UserDoesNotExistsException;
+import com.swapsell.AuthenticationService.security.JWTSecurityTokenGenerator;
 import com.swapsell.AuthenticationService.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,12 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private JWTSecurityTokenGenerator jwtSecurityTokenGenerator;
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user){
@@ -40,7 +43,14 @@ public class UserController {
             token.put("message","No user found");
             return new ResponseEntity<>(token,HttpStatus.OK);
         }
-        return null;
+        try {
+            User userByEmailAndPassWord = userService.findUserByEmailAndPassWord(user.getEmail(), user.getPassword());
+            token.put("message","Wrong credentials");
+            return new ResponseEntity<>(token,HttpStatus.OK);
+        } catch (UserDoesNotExistsException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+        }
+
 
     }
 
