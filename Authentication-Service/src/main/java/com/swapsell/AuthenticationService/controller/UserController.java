@@ -33,7 +33,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
         } catch (UserAlreadyExistsException e) {
-            throw new RuntimeException(e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
     }
 
