@@ -38,20 +38,18 @@ public class UserController {
     }
 
     @GetMapping("/logIn")
-    public ResponseEntity<?> userLogIn(@RequestBody UserLogIn user){
+    public ResponseEntity<?> userLogIn(@RequestBody UserLogIn userLogIn){
         Map<String,String> token = new HashMap<>();
-        if (userService.userByEmailId(user.getEmail()).isEmpty()){
+        if (userService.userByEmailId(userLogIn.getEmail()).isEmpty()){
             token.put("message","No user found");
             return new ResponseEntity<>(token,HttpStatus.OK);
         }
-        try {
-            User userByEmailAndPassWord = userService.findUserByEmailAndPassWord(user.getEmail(), user.getPassword());
+        if (userService.findUserByEmailAndPassWord(userLogIn.getEmail(), userLogIn.getPassword()).isEmpty()){
             token.put("message","Wrong credentials");
             return new ResponseEntity<>(token,HttpStatus.OK);
-        } catch (UserDoesNotExistsException e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
-
+        token = jwtSecurityTokenGenerator.generateJWTToken(userLogIn);
+        return new ResponseEntity<>(token,HttpStatus.OK);
 
     }
 

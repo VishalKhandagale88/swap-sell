@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByEmailAndPassWord(String email, String password) throws UserDoesNotExistsException {
+    public Optional<User> findUserByEmailAndPassWord(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
 
     }
