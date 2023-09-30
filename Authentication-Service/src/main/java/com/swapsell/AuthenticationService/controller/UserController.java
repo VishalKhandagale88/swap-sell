@@ -2,6 +2,7 @@ package com.swapsell.AuthenticationService.controller;
 
 
 import com.swapsell.AuthenticationService.domain.User;
+import com.swapsell.AuthenticationService.domain.UserLogIn;
 import com.swapsell.AuthenticationService.domain.UserResponse;
 import com.swapsell.AuthenticationService.exception.UserAlreadyExistsException;
 import com.swapsell.AuthenticationService.exception.UserDoesNotExistsException;
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/logIn")
-    public ResponseEntity<?> userLogIn(@RequestBody User user){
+    public ResponseEntity<?> userLogIn(@RequestBody UserLogIn user){
         Map<String,String> token = new HashMap<>();
         if (userService.userByEmailId(user.getEmail()).isEmpty()){
             token.put("message","No user found");

@@ -11,5 +11,5 @@ public interface UserService {
     User saveUser(User user) throws UserAlreadyExistsException;
     User UserLogIn(User user) throws UserDoesNotExistsException;
     Optional<User> userByEmailId(String emailId);
-    User findUserByEmailAndPassWord(String email, String password) throws UserDoesNotExistsException;
+    Optional<User> findUserByEmailAndPassWord(String email, String password) throws UserDoesNotExistsException;
 }

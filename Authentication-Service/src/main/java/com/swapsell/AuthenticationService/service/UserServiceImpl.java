@@ -42,12 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmailAndPassWord(String email, String password) throws UserDoesNotExistsException {
-        Optional<User> userWithEmailAndPassword = userRepository.findByEmailAndPassword(email, password);
-        if (userWithEmailAndPassword.isPresent()){
-         return userWithEmailAndPassword.get();
-        }else {
-            throw new UserDoesNotExistsException("email or password is wrong");
-        }
+    public Optional<User> findUserByEmailAndPassWord(String email, String password) throws UserDoesNotExistsException {
+        return userRepository.findByEmailAndPassword(email, password);
+
     }
 }
