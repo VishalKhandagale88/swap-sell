@@ -16,4 +16,6 @@ export class AuthService {
   getStatus():Observable<boolean>{
     return of(this.isLoggedIn);
   }
+
+  
 }
