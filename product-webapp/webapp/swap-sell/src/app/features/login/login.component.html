@@ -23,7 +23,10 @@
       <p>Let's sign you in.</p>
     </div>
     <form #from="ngForm" >
-      
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput name="email">
+      </mat-form-field>
     </form>
   </section>
 </div>
