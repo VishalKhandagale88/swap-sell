@@ -20,6 +20,7 @@
 	<modules>
 		<module>Authentication-Service</module>
 		<module>product-webapp</module>
+		<module>User-Service</module>
 	</modules>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
