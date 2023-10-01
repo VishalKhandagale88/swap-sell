@@ -1,4 +1,6 @@
 package com.swapsell.UserService.service;
 
-public class UserService {
+import com.swapsell.UserService.domain.User;
+
+public interface UserService {
 }
