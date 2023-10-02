@@ -16,10 +16,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUserToApplication(User user) throws UserAlreadyExistsException {
         Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
-        if (userByEmail.isEmpty()){
-            throw new UserAlreadyExistsException("User is already present with id" + user.getEmail());
+        if (userByEmail.isPresent()){
+            throw new UserAlreadyExistsException("user with "+user.getEmail()+" is already present");
         }
         return userRepository.save(user);
-
     }
 }
