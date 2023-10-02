@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
         if (userByEmail.isEmpty()){
             throw new UserAlreadyExistsException("User is already present with id" + user.getEmail());
         }
-        User userRegistered = userRepository.save(user);
-        return userRegistered;
+        return userRepository.save(user);
+
     }
 }
