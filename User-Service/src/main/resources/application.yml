@@ -1,1 +1,10 @@
+spring:
+  application:
+    name: user-service
+  data:
+    mongodb:
+      database: swap-Sell-users
+      uri: mongodb://localhost:27017
+server:
+  port: 8081
 
