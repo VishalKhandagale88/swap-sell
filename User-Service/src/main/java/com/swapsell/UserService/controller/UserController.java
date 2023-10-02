@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("user/register")
-    public ResponseEntity<?> registerUser(User user){
+    public ResponseEntity<?> registerUser(@RequestBody User user){
         try {
             User registeredUserToApplication = userService.registerUserToApplication(user);
             return new ResponseEntity<>(registeredUserToApplication,HttpStatus.CREATED);
