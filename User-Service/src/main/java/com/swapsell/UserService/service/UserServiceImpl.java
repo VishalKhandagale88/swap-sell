@@ -26,8 +26,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUserData(User user) throws UserDoesNotExistsException {
         Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
+        User existingUser ;
         if (userByEmail.isPresent()){
-            User existingUser = userByEmail.get();
+             existingUser = userByEmail.get();
             if (user.getEmail()!=null){
                 existingUser.setEmail(user.getEmail());
             }
@@ -52,9 +53,12 @@ public class UserServiceImpl implements UserService {
             if (user.getImage()!=null){
                 existingUser.setImage(user.getImage());
             }
+
+            userRepository.save(existingUser);
         }else {
             throw new UserDoesNotExistsException("user with "+user.getEmail()+" does not exists");
         }
+
         return user;
 
     }
