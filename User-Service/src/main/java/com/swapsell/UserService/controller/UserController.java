@@ -18,24 +18,23 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("user/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user){
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {
             User registeredUserToApplication = userService.registerUserToApplication(user);
-            return new ResponseEntity<>(registeredUserToApplication,HttpStatus.CREATED);
+            return new ResponseEntity<>(registeredUserToApplication, HttpStatus.CREATED);
         } catch (UserAlreadyExistsException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
 
     @PutMapping("user/updateUserData")
-    public ResponseEntity<?> updateUserData(@RequestBody User user){
+    public ResponseEntity<?> updateUserData(@RequestBody User user) {
         try {
             User updatedUserData = userService.updateUserData(user);
-            return new ResponseEntity<>(updatedUserData,HttpStatus.OK);
+            return new ResponseEntity<>(updatedUserData, HttpStatus.OK);
         } catch (UserDoesNotExistsException e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }
-
 
     }
 }
