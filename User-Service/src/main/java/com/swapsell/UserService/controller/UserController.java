@@ -2,6 +2,7 @@ package com.swapsell.UserService.controller;
 
 import com.swapsell.UserService.domain.User;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
+import com.swapsell.UserService.exception.UserDoesNotExistsException;
 import com.swapsell.UserService.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,13 @@ public class UserController {
 
     @PutMapping("user/updateUserData")
     public ResponseEntity<?> updateUserData(@RequestBody User user){
-        return null;
+        try {
+            User updatedUserData = userService.updateUserData(user);
+            return new ResponseEntity<>(updatedUserData,HttpStatus.OK);
+        } catch (UserDoesNotExistsException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+        }
+
+
     }
 }
