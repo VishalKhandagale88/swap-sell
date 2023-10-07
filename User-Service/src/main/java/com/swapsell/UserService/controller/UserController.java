@@ -4,7 +4,6 @@ import com.swapsell.UserService.domain.User;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
 import com.swapsell.UserService.service.UserService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
