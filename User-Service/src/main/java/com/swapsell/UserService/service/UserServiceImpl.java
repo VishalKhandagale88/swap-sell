@@ -78,4 +78,15 @@ public class UserServiceImpl implements UserService {
             throw new UserDoesNotExistsException("User with "+email+" is not found");
         }
     }
+
+    @Override
+    public boolean removeUserFromDb(String emailId) throws UserDoesNotExistsException {
+        Optional<User> userByEmail = userRepository.findUserByEmail(emailId);
+        if (userByEmail.isPresent()){
+            userRepository.delete(userByEmail.get());
+            return true;
+        }else {
+            throw new UserDoesNotExistsException("user does not exists with "+emailId+" this email");
+        }
+    }
 }
