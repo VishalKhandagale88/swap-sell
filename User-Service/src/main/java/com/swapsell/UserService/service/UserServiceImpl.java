@@ -68,4 +68,14 @@ public class UserServiceImpl implements UserService {
         return user;
 
     }
+
+    @Override
+    public User getUserInformation(String email) throws UserDoesNotExistsException {
+        Optional<User> userByEmail = userRepository.findUserByEmail(email);
+        if (userByEmail.isPresent()){
+            return userByEmail.get();
+        }else {
+            throw new UserDoesNotExistsException("User with "+email+" is not found");
+        }
+    }
 }
