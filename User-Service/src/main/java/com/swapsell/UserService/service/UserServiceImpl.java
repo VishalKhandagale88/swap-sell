@@ -9,6 +9,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -94,10 +98,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User postAnAdd(String emailId, Product product) throws UserDoesNotExistsException {
         Optional<User> userByEmail = userRepository.findUserByEmail(emailId);
+        User user;
         if (userByEmail.isPresent()){
-            User user = userByEmail.get();
-
+            user = userByEmail.get();
+            List<Product> products = user.getProducts();
+            if (products==null){
+                // will create a product list
+                user.setProducts(Collections.singletonList(product));
+            }else {
+                products.add(product);
+                user.setProducts(products);
+            }
+        }else {
+            throw new UserDoesNotExistsException("User does not found with "+emailId+" id");
         }
-        return  null;
+        userRepository.save(user);
+        return user;
+
     }
 }
