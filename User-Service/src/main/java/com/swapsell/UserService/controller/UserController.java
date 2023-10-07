@@ -1,5 +1,6 @@
 package com.swapsell.UserService.controller;
 
+import com.swapsell.UserService.domain.Product;
 import com.swapsell.UserService.domain.User;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
@@ -54,6 +55,16 @@ public class UserController {
         } catch (UserDoesNotExistsException e) {
             return  new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
 
+        }
+    }
+
+    @PostMapping("user/product/{email}")
+    public ResponseEntity<?> addProducts(@PathVariable("email") String email, @RequestBody Product product){
+        try {
+            User user = userService.postAnAdd(email, product);
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        } catch (UserDoesNotExistsException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
         }
     }
 
