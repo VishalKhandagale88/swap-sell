@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/user/userData/{email}")
-    public ResponseEntity<?> fetchUserData(@PathVariable String userEmailI){
+    public ResponseEntity<?> fetchUserData(@PathVariable("email") String userEmailI){
         try {
             User userInformation = userService.getUserInformation(userEmailI);
             return  new ResponseEntity<>(userInformation,HttpStatus.OK);
