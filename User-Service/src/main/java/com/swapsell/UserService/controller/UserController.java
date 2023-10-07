@@ -4,13 +4,11 @@ import com.swapsell.UserService.domain.User;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
 import com.swapsell.UserService.service.UserService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -37,4 +35,16 @@ public class UserController {
         }
 
     }
+
+    @GetMapping("/user/userData/{email}")
+    public ResponseEntity<?> fetchUserData(@PathVariable String userEmailI){
+        try {
+            User userInformation = userService.getUserInformation(userEmailI);
+            return  new ResponseEntity<>(userInformation,HttpStatus.OK);
+        } catch (UserDoesNotExistsException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+
+        }
+    }
+
 }
