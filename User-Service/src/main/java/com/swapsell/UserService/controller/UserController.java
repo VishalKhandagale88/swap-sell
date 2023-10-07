@@ -46,4 +46,15 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("user/delete/{email}")
+    public ResponseEntity<?> deleteUser(@PathVariable("email") String userEmailId){
+        try {
+            boolean removeUserFromDb = userService.removeUserFromDb(userEmailId);
+            return new ResponseEntity<>("user is removed",HttpStatus.OK);
+        } catch (UserDoesNotExistsException e) {
+            return  new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+
+        }
+    }
+
 }
