@@ -3,7 +3,6 @@ package com.swapsell.UserService.domain;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,5 +23,4 @@ public class Product {
     private String state;
     private String city;
     private LocalDateTime addPostedOnDate;
-    private List<Product> products;
 }

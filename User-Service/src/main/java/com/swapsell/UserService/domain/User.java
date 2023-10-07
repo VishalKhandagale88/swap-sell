@@ -27,4 +27,5 @@ public class User {
     private int pinCode;
     private String gender;
     private String image;
+    private List<Product> products;
 }
