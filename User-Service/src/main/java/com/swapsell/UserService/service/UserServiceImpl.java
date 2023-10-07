@@ -1,5 +1,6 @@
 package com.swapsell.UserService.service;
 
+import com.swapsell.UserService.domain.Product;
 import com.swapsell.UserService.domain.User;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
@@ -88,5 +89,15 @@ public class UserServiceImpl implements UserService {
         }else {
             throw new UserDoesNotExistsException("user does not exists with "+emailId+" this email");
         }
+    }
+
+    @Override
+    public User postAnAdd(String emailId, Product product) throws UserDoesNotExistsException {
+        Optional<User> userByEmail = userRepository.findUserByEmail(emailId);
+        if (userByEmail.isPresent()){
+            User user = userByEmail.get();
+
+        }
+        return  null;
     }
 }
