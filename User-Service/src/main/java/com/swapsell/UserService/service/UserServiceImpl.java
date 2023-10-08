@@ -2,6 +2,7 @@ package com.swapsell.UserService.service;
 
 import com.swapsell.UserService.domain.Product;
 import com.swapsell.UserService.domain.User;
+import com.swapsell.UserService.exception.ProductsDoesNotExistsException;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
 import com.swapsell.UserService.repository.UserRepository;
@@ -11,10 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -114,6 +112,28 @@ public class UserServiceImpl implements UserService {
             }
         }else {
             throw new UserDoesNotExistsException("User does not found with "+emailId+" id");
+        }
+        userRepository.save(user);
+        return user;
+
+    }
+
+    @Override
+    public User removeProductsFromProductsList(String emailId, Long productId) throws UserDoesNotExistsException, ProductsDoesNotExistsException {
+        Optional<User> userByEmail = userRepository.findUserByEmail(emailId);
+        User user;
+        if (userByEmail.isPresent()){
+            user = userByEmail.get();
+            List<Product> productList = user.getProducts();
+            Optional<Product> optionalProduct = productList.stream().filter(searchItem -> Objects.equals(searchItem.getId(), productId)).findAny();
+            if (optionalProduct.isPresent()){
+                productList.remove(optionalProduct.get());
+                user.setProducts(productList);
+            }else{
+                throw new ProductsDoesNotExistsException("Product is not available with "+productId);
+            }
+        }else {
+            throw new UserDoesNotExistsException("No user found with "+emailId);
         }
         userRepository.save(user);
         return user;
