@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 public class Product {
+    private Long id;
     private String name;
     private String title;
     private String description;
