@@ -3,6 +3,8 @@ package com.swapsell.ProductService.domain;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,4 +26,5 @@ public class Product {
     private String state;
     private String pinCode;
     private String data;
+    private List<String> images;
 }
