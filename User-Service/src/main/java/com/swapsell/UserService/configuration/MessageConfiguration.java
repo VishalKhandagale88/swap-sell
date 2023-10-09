@@ -1,7 +1,6 @@
 package com.swapsell.UserService.configuration;
 
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +18,9 @@ public class MessageConfiguration {
     @Bean
     public Queue queue(){
         return new Queue(queueName1);
+    }
+    @Bean
+    public Binding binding(Queue queue, DirectExchange directExchange){
+        return BindingBuilder.bind(queue).to(directExchange).with(routingKey1);
     }
 }
