@@ -8,27 +8,33 @@ import com.swapsell.UserService.exception.ProductsDoesNotExistsException;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
 import com.swapsell.UserService.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.*;
-
+import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
+    private static final Random random = new Random();
+    public static long generateId() {
+        long id = random.nextLong();
+        if (id == Long.MIN_VALUE) {
+            id = 0L; // To avoid negative value for id
+        } else {
+            id = Math.abs(id);
+        }
+        return id;
+    }
 
     @RabbitListener(queues = MessageConfiguration.queueName1)
     public void userDataFromAuthService(UserDTO user) throws UserAlreadyExistsException{
         String userEmail = user.getEmail();
         String userLastName = user.getLastName();
         String userFirstName = user.getFirstName();
-        User newUser = new User(userFirstName,userLastName,null,userEmail,null,null,null,0,null,null,null);
+        User newUser = new User(generateId(),userFirstName,userLastName,null,userEmail,null,null,null,0,null,null,null);
         registerUserToApplication(newUser);
     }
     @Override
