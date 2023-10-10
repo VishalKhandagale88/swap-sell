@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
         if (userByEmail.isPresent()){
             throw new UserAlreadyExistsException("user with "+user.getEmail()+" is already present");
         }
+
         return userRepository.save(user);
     }
 
