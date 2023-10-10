@@ -3,6 +3,7 @@ package com.swapsell.UserService.service;
 import com.swapsell.UserService.configuration.MessageConfiguration;
 import com.swapsell.UserService.domain.Product;
 import com.swapsell.UserService.domain.User;
+import com.swapsell.UserService.domain.UserDTO;
 import com.swapsell.UserService.exception.ProductsDoesNotExistsException;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
@@ -23,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
 
     @RabbitListener(queues = MessageConfiguration.queueName1)
-    public void userDataFromAuthService(User user) throws UserAlreadyExistsException{
-        registerUserToApplication(user);
+    public void userDataFromAuthService(UserDTO user) throws UserAlreadyExistsException{
+        System.out.println(user);
     }
     @Override
     public User registerUserToApplication(User user) throws UserAlreadyExistsException {
