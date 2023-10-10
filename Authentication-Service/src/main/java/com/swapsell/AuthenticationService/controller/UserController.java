@@ -58,7 +58,7 @@ public class UserController {
         Optional<User> userFromDb = userService.userByEmailId(emailId);
         if (userFromDb.isPresent()){
             User existingUser = userFromDb.get();
-            UserResponse userResponse = new UserResponse(existingUser.getId(), existingUser.getFistName(), existingUser.getLastName(), existingUser.getEmail());
+            UserResponse userResponse = new UserResponse(existingUser.getId(), existingUser.getFirstName(), existingUser.getLastName(), existingUser.getEmail());
             return new  ResponseEntity<>(userResponse,HttpStatus.OK);
         }else {
             return new ResponseEntity<>("user with "+emailId+" email id not found",HttpStatus.NOT_FOUND);
