@@ -16,7 +16,7 @@ import java.util.List;
 @Document
 public class User {
     @MongoId
-    private String id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
