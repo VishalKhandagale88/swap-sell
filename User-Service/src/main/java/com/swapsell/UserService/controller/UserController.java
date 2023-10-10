@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PutMapping("user/updateUserData/{email}")
-    public ResponseEntity<?> updateUserData(@PathVariable String email,@RequestBody User user) {
+    public ResponseEntity<?> updateUserData(@PathVariable("email") String email,@RequestBody User user) {
         try {
             User updatedUserData = userService.updateUserData(user,email);
             return new ResponseEntity<>(updatedUserData, HttpStatus.OK);
