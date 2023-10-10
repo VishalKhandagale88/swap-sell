@@ -41,9 +41,6 @@ public class UserServiceImpl implements UserService {
         User existingUser ;
         if (userByEmail.isPresent()){
              existingUser = userByEmail.get();
-             if (user.getId()!=null){
-                 existingUser.setId(existingUser.getId());
-             }
             if (user.getEmail()!=null){
                 existingUser.setEmail(user.getEmail());
             }
