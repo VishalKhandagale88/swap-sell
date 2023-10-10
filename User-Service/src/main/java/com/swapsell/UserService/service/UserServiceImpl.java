@@ -1,5 +1,6 @@
 package com.swapsell.UserService.service;
 
+import com.swapsell.UserService.configuration.MessageConfiguration;
 import com.swapsell.UserService.domain.Product;
 import com.swapsell.UserService.domain.User;
 import com.swapsell.UserService.exception.ProductsDoesNotExistsException;
@@ -7,6 +8,7 @@ import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
 import com.swapsell.UserService.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,12 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+
+
+    @RabbitListener(queues = MessageConfiguration.queueName1)
+    public void userDataFromAuthService(User user) throws UserAlreadyExistsException{
+        System.out.println(user);
+    }
     @Override
     public User registerUserToApplication(User user) throws UserAlreadyExistsException {
         Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
