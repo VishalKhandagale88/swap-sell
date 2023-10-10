@@ -1,5 +1,6 @@
 package com.swapsell.AuthenticationService.service;
 
+import com.swapsell.AuthenticationService.configuration.MessageBusConfiguration;
 import com.swapsell.AuthenticationService.domain.User;
 import com.swapsell.AuthenticationService.exception.UserAlreadyExistsException;
 import com.swapsell.AuthenticationService.exception.UserDoesNotExistsException;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
         if (userWithEmailId.isPresent()){
             throw new UserAlreadyExistsException("This user is already taken try other");
         }
+        rabbitTemplate.convertAndSend(MessageBusConfiguration.exchangeName1,MessageBusConfiguration.routingKey1,user);
         return userRepository.save(user);
     }
 
