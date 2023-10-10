@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUserData(User user) throws UserDoesNotExistsException {
-        Optional<User> userByEmail = userRepository.findUserByEmail(user.getEmail());
+    public User updateUserData(User user,String email) throws UserDoesNotExistsException {
+        Optional<User> userByEmail = userRepository.findUserByEmail(email);
         User existingUser ;
         if (userByEmail.isPresent()){
              existingUser = userByEmail.get();

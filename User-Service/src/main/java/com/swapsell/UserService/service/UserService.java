@@ -8,7 +8,7 @@ import com.swapsell.UserService.exception.UserDoesNotExistsException;
 
 public interface UserService {
     User registerUserToApplication(User user) throws UserAlreadyExistsException;
-    User updateUserData(User user) throws UserDoesNotExistsException;
+    User updateUserData(User user,String email) throws UserDoesNotExistsException;
     User getUserInformation(String email) throws UserDoesNotExistsException;
     boolean removeUserFromDb(String emailId) throws  UserDoesNotExistsException;
     User postAnAdd(String emailId, Product product) throws UserDoesNotExistsException;

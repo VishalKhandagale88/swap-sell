@@ -19,7 +19,7 @@ public class UserController {
     @PutMapping("user/updateUserData/{email}")
     public ResponseEntity<?> updateUserData(@PathVariable String email,@RequestBody User user) {
         try {
-            User updatedUserData = userService.updateUserData(user);
+            User updatedUserData = userService.updateUserData(user,email);
             return new ResponseEntity<>(updatedUserData, HttpStatus.OK);
         } catch (UserDoesNotExistsException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
