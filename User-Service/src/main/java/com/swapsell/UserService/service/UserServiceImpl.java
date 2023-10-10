@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         String userLastName = user.getLastName();
         String userFirstName = user.getFirstName();
         User newUser = new User(userFirstName,userLastName,null,userEmail,null,null,null,0,null,null,null);
-
+        registerUserToApplication(newUser);
     }
     @Override
     public User registerUserToApplication(User user) throws UserAlreadyExistsException {
@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
         if (userByEmail.isPresent()){
             throw new UserAlreadyExistsException("user with "+user.getEmail()+" is already present");
         }
-
+        System.out.println("register user to application method");
+        System.out.println(user);
         return userRepository.save(user);
     }
 
