@@ -75,13 +75,13 @@ public class UserServiceImpl implements UserService {
             if (user.getImage()!=null){
                 existingUser.setImage(user.getImage());
             }
-
+            userRepository.save(existingUser);
 
         }else {
             throw new UserDoesNotExistsException("user with "+user.getEmail()+" does not exists");
         }
 
-        return user;
+        return existingUser;
 
     }
 
