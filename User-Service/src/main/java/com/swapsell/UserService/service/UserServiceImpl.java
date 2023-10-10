@@ -27,12 +27,9 @@ public class UserServiceImpl implements UserService {
     public void userDataFromAuthService(UserDTO user) throws UserAlreadyExistsException{
         String userEmail = user.getEmail();
         String userLastName = user.getLastName();
-        String firstName = user.getFirstName();
-        User newUser = new User();
-        newUser.setEmail(userEmail);
-        newUser.setLastName(userLastName);
-        newUser.setFirstName(firstName);
-        registerUserToApplication(newUser);
+        String userFirstName = user.getFirstName();
+        User newUser = new User(userFirstName,userLastName,null,userEmail,null,null,null,0,null,null,null);
+
     }
     @Override
     public User registerUserToApplication(User user) throws UserAlreadyExistsException {
@@ -78,7 +75,7 @@ public class UserServiceImpl implements UserService {
                 existingUser.setImage(user.getImage());
             }
 
-            userRepository.save(existingUser);
+
         }else {
             throw new UserDoesNotExistsException("user with "+user.getEmail()+" does not exists");
         }
