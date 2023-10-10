@@ -25,7 +25,14 @@ public class UserServiceImpl implements UserService {
 
     @RabbitListener(queues = MessageConfiguration.queueName1)
     public void userDataFromAuthService(UserDTO user) throws UserAlreadyExistsException{
-
+        String userEmail = user.getEmail();
+        String userLastName = user.getLastName();
+        String firstName = user.getFirstName();
+        User newUser = new User();
+        newUser.setEmail(userEmail);
+        newUser.setLastName(userLastName);
+        newUser.setFirstName(firstName);
+        registerUserToApplication(newUser);
     }
     @Override
     public User registerUserToApplication(User user) throws UserAlreadyExistsException {
