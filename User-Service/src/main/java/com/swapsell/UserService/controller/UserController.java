@@ -16,16 +16,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("user/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        try {
-            User registeredUserToApplication = userService.registerUserToApplication(user);
-            return new ResponseEntity<>(registeredUserToApplication, HttpStatus.CREATED);
-        } catch (UserAlreadyExistsException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-        }
-    }
-
     @PutMapping("user/updateUserData")
     public ResponseEntity<?> updateUserData(@RequestBody User user) {
         try {
