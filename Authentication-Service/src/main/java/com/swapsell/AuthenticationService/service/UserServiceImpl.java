@@ -4,6 +4,7 @@ import com.swapsell.AuthenticationService.domain.User;
 import com.swapsell.AuthenticationService.exception.UserAlreadyExistsException;
 import com.swapsell.AuthenticationService.exception.UserDoesNotExistsException;
 import com.swapsell.AuthenticationService.repository.UserRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     @Override
     public User saveUser(User user) throws UserAlreadyExistsException {
         Optional<User> userWithEmailId = userRepository.findByEmail(user.getEmail());

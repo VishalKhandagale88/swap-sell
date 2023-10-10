@@ -2,7 +2,7 @@ spring:
   application:
     name: authentication-service
   datasource:
-    url: jdbc:mysql://localhost:3306/marketPlaceDB?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/swapSellUsers1?createDatabaseIfNotExist=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
