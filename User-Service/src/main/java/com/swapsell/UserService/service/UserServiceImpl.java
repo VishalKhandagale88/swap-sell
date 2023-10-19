@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
         if (userByEmail.isPresent()) {
             user = userByEmail.get();
             List<Product> productList = user.getProducts();
-            Optional<Product> optionalProduct = productList.stream().filter(searchItem -> Objects.equals(searchItem.getId(), productId)).findAny();
+            Optional<Product> optionalProduct = productList.stream().filter(searchItem -> Objects.equals(searchItem.get_id(), productId)).findAny();
             if (optionalProduct.isPresent()) {
                 productList.remove(optionalProduct.get());
                 user.setProducts(productList);

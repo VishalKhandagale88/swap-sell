@@ -1,6 +1,7 @@
 package com.swapsell.UserService.domain;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
@@ -12,8 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 public class Product {
-
-    private String id;
+    @Id
+    private String _id;
     private String name;
     private String title;
     private String description;
