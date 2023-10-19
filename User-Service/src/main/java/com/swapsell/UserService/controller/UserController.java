@@ -49,7 +49,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("user/product/{email}")
+    @PostMapping("user/addProduct/{email}")
     public ResponseEntity<?> addProducts(@PathVariable("email") String email, @RequestBody Product product){
         try {
             User user = userService.postAnAdd(email, product);
