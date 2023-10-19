@@ -59,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("user/product/{email}/{productId}")
+    @DeleteMapping("user/product/{email}/{productId}")
     public ResponseEntity<?> removeProducts(@PathVariable("email") String email,@PathVariable("productId") Long productId){
         try {
             User removedProductsFromProductsList = userService.removeProductsFromProductsList(email, productId);
