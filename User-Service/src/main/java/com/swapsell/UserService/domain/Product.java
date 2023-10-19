@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 public class Product {
-    @MongoId
+
     private String id;
     private String name;
     private String title;
