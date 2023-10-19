@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @DeleteMapping("user/product/{email}/{productId}")
-    public ResponseEntity<?> removeProducts(@PathVariable("email") String email,@PathVariable("productId") Long productId){
+    public ResponseEntity<?> removeProducts(@PathVariable("email") String email,@PathVariable("productId") String productId){
         try {
             User removedProductsFromProductsList = userService.removeProductsFromProductsList(email, productId);
             return new ResponseEntity<>(removedProductsFromProductsList,HttpStatus.OK);

@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User removeProductsFromProductsList(String emailId, Long productId) throws UserDoesNotExistsException, ProductsDoesNotExistsException {
+    public User removeProductsFromProductsList(String emailId, String productId) throws UserDoesNotExistsException, ProductsDoesNotExistsException {
         Optional<User> userByEmail = userRepository.findUserByEmail(emailId);
         User user;
         if (userByEmail.isPresent()) {

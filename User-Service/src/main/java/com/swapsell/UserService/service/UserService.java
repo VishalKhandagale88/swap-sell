@@ -12,5 +12,5 @@ public interface UserService {
     User getUserInformation(String email) throws UserDoesNotExistsException;
     boolean removeUserFromDb(String emailId) throws  UserDoesNotExistsException;
     User postAnAdd(String emailId, Product product) throws UserDoesNotExistsException;
-    User removeProductsFromProductsList(String emailId,Long productId) throws UserDoesNotExistsException, ProductsDoesNotExistsException;
+    User removeProductsFromProductsList(String emailId,String productId) throws UserDoesNotExistsException, ProductsDoesNotExistsException;
 }
