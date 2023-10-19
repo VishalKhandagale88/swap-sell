@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 public class Product {
-    @Id
-    private String _id;
+    private String id;
     private String name;
     private String title;
     private String description;

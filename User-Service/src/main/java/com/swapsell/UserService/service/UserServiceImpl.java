@@ -7,7 +7,6 @@ import com.swapsell.UserService.domain.UserDTO;
 import com.swapsell.UserService.exception.ProductsDoesNotExistsException;
 import com.swapsell.UserService.exception.UserAlreadyExistsException;
 import com.swapsell.UserService.exception.UserDoesNotExistsException;
-import com.swapsell.UserService.repository.ProductRepository;
 import com.swapsell.UserService.repository.UserRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,6 @@ public class UserServiceImpl implements UserService {
     private static final Random random = new Random();
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ProductRepository productRepository;
 
     public static long generateId() {
         long id = random.nextLong();
@@ -126,7 +123,7 @@ public class UserServiceImpl implements UserService {
         if (userByEmail.isPresent()) {
             user = userByEmail.get();
             List<Product> productList = user.getProducts();
-            Optional<Product> optionalProduct = productList.stream().filter(searchItem -> Objects.equals(searchItem.get_id(), productId)).findAny();
+            Optional<Product> optionalProduct = productList.stream().filter(searchItem -> Objects.equals(searchItem.getId(), productId)).findAny();
             if (optionalProduct.isPresent()) {
                 productList.remove(optionalProduct.get());
                 user.setProducts(productList);
