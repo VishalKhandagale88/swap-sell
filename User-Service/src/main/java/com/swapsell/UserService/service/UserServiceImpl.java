@@ -21,6 +21,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public static Long preNumber=0L;
+
     public static long generateId() {
         long id = random.nextLong();
         if (id == Long.MIN_VALUE) {
@@ -96,6 +98,7 @@ public class UserServiceImpl implements UserService {
     public User postAnAdd(String emailId, Product product) throws UserDoesNotExistsException {
         Optional<User> userByEmail = userRepository.findUserByEmail(emailId);
         User user;
+        String productIdGenerated = (preNumber+1)+ String.valueOf(generateId()) ;
         LocalDateTime localDateTime = LocalDateTime.now();
         product.setAddPostedOnDate(localDateTime);
         if (userByEmail.isPresent()) {
@@ -103,8 +106,12 @@ public class UserServiceImpl implements UserService {
             List<Product> products = user.getProducts();
             if (products == null) {
                 // will create a product list
+
+                product.setId(productIdGenerated);
                 user.setProducts(Collections.singletonList(product));
+
             } else {
+                product.setId(productIdGenerated);
                 products.add(product);
                 user.setProducts(products);
             }
