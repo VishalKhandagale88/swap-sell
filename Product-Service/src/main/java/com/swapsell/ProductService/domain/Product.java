@@ -2,6 +2,7 @@ package com.swapsell.ProductService.domain;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 import java.util.List;
 
