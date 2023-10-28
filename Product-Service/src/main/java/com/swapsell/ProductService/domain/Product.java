@@ -1,8 +1,10 @@
 package com.swapsell.ProductService.domain;
 
 import lombok.*;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.List;
 
@@ -30,5 +32,6 @@ public class Product {
     private List<String> images;
     @Transient
     private User seller;
-
+    @Relationship(type = "OWNS",direction = Relationship.Direction.INCOMING)
+    private OwnsRelationShip ownsRelationShip;
 }
