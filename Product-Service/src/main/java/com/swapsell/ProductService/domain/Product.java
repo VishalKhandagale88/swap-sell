@@ -28,4 +28,7 @@ public class Product {
     private String pinCode;
     private String data;
     private List<String> images;
+    @Transient
+    private User seller;
+
 }
