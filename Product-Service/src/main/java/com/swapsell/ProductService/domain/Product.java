@@ -27,7 +27,7 @@ public class Product {
     private String address;
     private String city;
     private String state;
-    private String pinCode;
+    private Long pinCode;
     private String date;
     private List<String> images;
     @Transient
