@@ -1,6 +1,7 @@
 package com.swapsell.ProductService.service;
 
 import com.swapsell.ProductService.domain.Product;
+import com.swapsell.ProductService.domain.ProductDTO;
 import com.swapsell.ProductService.repository.ProductRepository;
 import com.swapsell.ProductService.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -16,24 +17,27 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Override
-    public Product addNewProduct(Product product) {
+    public Product addNewProduct(ProductDTO productDTO) {
         Product product1 = new Product();
-        product1.setName(product.getName());
-        product1.setTitle(product.getTitle());
-        product1.setDescription(product.getDescription());
-        product1.setCategory(product.getCategory());
-        product1.setPrice(product.getPrice());
-        product1.setAgeInDays(product.getAgeInDays());
-        product1.setCondition(product.getCondition());
-        product1.setAddress(product.getAddress());
-        product1.setCity(product.getCity());
-        product1.setState(product.getState());
-        product1.setPinCode(product.getPinCode());
-        product1.setDate(product.getDate());
-        product1.setImages(product.getImages());
+        product1.setName(productDTO.getName());
+        product1.setTitle(productDTO.getTitle());
+        product1.setDescription(productDTO.getDescription());
+        product1.setCategory(productDTO.getCategory());
+        product1.setPrice(productDTO.getPrice());
+        product1.setAgeInDays(productDTO.getAgeInDays());
+        product1.setCondition(productDTO.getCondition());
+        product1.setAddress(productDTO.getAddress());
+        product1.setCity(productDTO.getCity());
+        product1.setState(productDTO.getState());
+        product1.setPinCode(productDTO.getPinCode());
+        product1.setDate(productDTO.getDate());
+        product1.setImages(productDTO.getImages());
 
         Product newProduct = productRepository.save(product1);
-        return null;
+
+        userRepository.createOwnsRelationship(productDTO.getEmail(), newProduct.getId());
+
+        return newProduct;
 
     }
 }
