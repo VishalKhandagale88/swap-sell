@@ -19,6 +19,7 @@ public class ProductController {
 
     @PostMapping("/user")
     public User addNewUser(@RequestBody User user){
-        return null;
+        return productService.addNewUser(user);
+
     }
 }
