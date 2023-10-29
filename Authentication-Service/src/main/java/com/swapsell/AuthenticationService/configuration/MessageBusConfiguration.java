@@ -13,6 +13,9 @@ public class MessageBusConfiguration {
     public static final String exchangeName1 = "swap-sell-user-service-exchange";
     public static final String queueName1 = "swap-sell-user-service-queue";
     public static final String routingKey1 = "swap-sell-ser-service-routing-key";
+
+    public static final String getExchangeName2 = "second-service-exchange";
+    public static final String routingKey2 = "second-service-routing-key";
     @Bean
     @Primary
     public DirectExchange directExchange(){
