@@ -2,6 +2,7 @@ package com.swapsell.ProductService.service;
 
 import com.swapsell.ProductService.domain.Product;
 import com.swapsell.ProductService.domain.ProductDTO;
+import com.swapsell.ProductService.domain.User;
 import com.swapsell.ProductService.repository.ProductRepository;
 import com.swapsell.ProductService.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -40,4 +41,11 @@ public class ProductServiceImpl implements ProductService {
         return newProduct;
 
     }
+
+    @Override
+    public User addNewUser(User user) {
+        User user1 = userRepository.save(user);
+        return user1;
+    }
+
 }
