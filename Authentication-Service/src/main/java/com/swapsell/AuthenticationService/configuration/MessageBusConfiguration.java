@@ -1,5 +1,6 @@
 package com.swapsell.AuthenticationService.configuration;
 
+import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -34,6 +35,10 @@ public class MessageBusConfiguration {
     @Bean
     public DirectExchange secondExchange(){
         return new  DirectExchange(getExchangeName2);
+    }
+    @Bean
+    public Binding secondBinding(Queue queue,DirectExchange exchange){
+        return BindingBuilder.bind(queue).to(exchange).with(routingKey2);
     }
     @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
