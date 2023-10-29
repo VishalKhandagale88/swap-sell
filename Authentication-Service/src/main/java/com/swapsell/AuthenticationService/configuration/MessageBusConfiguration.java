@@ -32,6 +32,10 @@ public class MessageBusConfiguration {
     }
 
     @Bean
+    public DirectExchange secondExchange(){
+        return new  DirectExchange(getExchangeName2);
+    }
+    @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
         return new Jackson2JsonMessageConverter();
     }
